@@ -7,7 +7,9 @@ defmodule SubmodalTestWeb.SubmodalLive do
       <:counter>
         <.live_component module={SubmodalTestWeb.SubmodalLive.Counter} id="counter" />
       </:counter>
-      <:two>hi again</:two>
+      <:input>
+        <.live_component module={SubmodalTestWeb.SubmodalLive.Input} id="input" />
+      </:input>
     </.live_component>
     """
   end

@@ -1,8 +1,8 @@
 defmodule SubmodalTestWeb.SubmodalLive.Submodal do
   use SubmodalTestWeb.Components.SubmodalRoot
 
-  submodal(:counter, default: true)
-  submodal(:two)
+  submodal(:counter)
+  submodal(:input, default: true)
 
   def mount(socket) do
     socket
@@ -57,11 +57,11 @@ defmodule SubmodalTestWeb.SubmodalLive.Submodal do
           </button>
           <button
             phx-click="push_submodal"
-            phx-value-submodal="two"
+            phx-value-submodal="input"
             phx-target={@myself}
             class="px-2 py-1 bg-brand rounded font-medium text-white"
           >
-            Push :two
+            :input
           </button>
         </div>
       </div>
