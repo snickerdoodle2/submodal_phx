@@ -4,7 +4,9 @@ defmodule SubmodalTestWeb.SubmodalLive do
   def render(assigns) do
     ~H"""
     <.live_component module={SubmodalTestWeb.SubmodalLive.Submodal} id="submodal">
-      <:one>hi</:one>
+      <:counter>
+        <.live_component module={SubmodalTestWeb.SubmodalLive.Counter} id="counter" />
+      </:counter>
       <:two>hi again</:two>
     </.live_component>
     """

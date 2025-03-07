@@ -1,7 +1,7 @@
 defmodule SubmodalTestWeb.SubmodalLive.Submodal do
   use SubmodalTestWeb.Components.SubmodalRoot
 
-  submodal(:one, default: true)
+  submodal(:counter, default: true)
   submodal(:two)
 
   def mount(socket) do
@@ -17,7 +17,7 @@ defmodule SubmodalTestWeb.SubmodalLive.Submodal do
 
     ~H"""
     <div class="border flex min-h-96">
-      <div class="flex-1">
+      <div class="flex-1 flex items-center justify-center">
         <%= for submodal <- @submodals do %>
           <%= if @current_submodal == elem(submodal, 0) do %>
             {render_slot(elem(submodal, 1), %{root: @myself})}
@@ -41,11 +41,11 @@ defmodule SubmodalTestWeb.SubmodalLive.Submodal do
         <div class="flex gap-1">
           <button
             phx-click="push_submodal"
-            phx-value-submodal="one"
+            phx-value-submodal="counter"
             phx-target={@myself}
             class="px-2 py-1 bg-brand rounded font-medium text-white"
           >
-            Push :one
+            :counter
           </button>
           <button
             phx-click="pop_submodal"
