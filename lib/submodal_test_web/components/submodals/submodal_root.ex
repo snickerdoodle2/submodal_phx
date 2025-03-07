@@ -1,4 +1,26 @@
 defmodule SubmodalTestWeb.Components.SubmodalRoot do
+  @moduledoc """
+  Rough idea for SubModalRoot component
+
+  this module handles logic of swapping components while traversing the modal
+
+  it was the first time I've ever wrote __using__/1 macro so it's easy to break (i think)
+
+  using attributes is weird :(
+  eg. submodal/2 macro has to be called above init_stack/1 macro
+
+  slot compile time checking would be nice
+
+  navigate_submodal/1 macro would be great :D
+  """
+
+  @doc """
+  opts ideas:
+  - children: checking if given path is reachable (no weird bugs)
+  - title
+  - preserve (idk how to call it): do not unmount this if it's not the current submodal
+  (does not lose state igs), just hide it from the DOM
+  """
   defmacro submodal(name, opts \\ []) do
     quote do
       default = Keyword.get(unquote(opts), :default, false)

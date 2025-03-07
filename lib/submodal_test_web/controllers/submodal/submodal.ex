@@ -1,6 +1,8 @@
 defmodule SubmodalTestWeb.SubmodalLive.Submodal do
+  # NOTE: Read SubmodalTestWeb.Components.SubmodalRoot moduledoc as well :)
   use SubmodalTestWeb.Components.SubmodalRoot
 
+  # FIXME: submodal/1 needs to be called above init_stack/1
   submodal(:counter)
   submodal(:input, default: true)
 
@@ -10,6 +12,15 @@ defmodule SubmodalTestWeb.SubmodalLive.Submodal do
     |> then(&{:ok, &1})
   end
 
+  # NOTE: propably i would do something like requiring function component called container 
+  # that contains a slot called :submodal and moving render/1 inside __using__/1 macro
+  # <.container>
+  #     <%= for submodal <- @submodals do %>
+  #         <%= if @current_submodal == elem(submodal, 0) do %>
+  #             {render_slot(elem(submodal, 1)})}
+  #         <% end %>
+  #     <% end %>
+  # </.container>
   def render(assigns) do
     assigns =
       Map.take(assigns, @submodals)
@@ -20,7 +31,7 @@ defmodule SubmodalTestWeb.SubmodalLive.Submodal do
       <div class="flex-1 flex items-center justify-center">
         <%= for submodal <- @submodals do %>
           <%= if @current_submodal == elem(submodal, 0) do %>
-            {render_slot(elem(submodal, 1), %{root: @myself})}
+            {render_slot(elem(submodal, 1))}
           <% end %>
         <% end %>
       </div>
