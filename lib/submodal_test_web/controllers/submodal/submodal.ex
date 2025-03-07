@@ -26,17 +26,18 @@ defmodule SubmodalTestWeb.SubmodalLive.Submodal do
       </div>
 
       <div class="px-5 py-3 border-l flex flex-col justify-between">
-        <div>
-          <p>
-            Current submodal: <span class="text-brand">:{@current_submodal |> Atom.to_string()}</span>
-          </p>
-          <p class="font-medium text-xl">Current stack:</p>
-          <ol class="list">
-            <li :for={submodal <- @submodal_stack} class="list-decimal">
-              :{Atom.to_string(submodal)}
-            </li>
-          </ol>
-        </div>
+        <p>
+          Current submodal: <span class="text-brand">:{@current_submodal |> Atom.to_string()}</span>
+        </p>
+        <p class="font-medium text-xl">Current stack:</p>
+        <ol class="flex flex-col gap-1 justify-end flex-1 pb-8">
+          <li
+            :for={submodal <- @submodal_stack}
+            class="first:bg-brand/50 first:font-semibold w-full text-center py-1 bg-gray-100 rounded"
+          >
+            :{Atom.to_string(submodal)}
+          </li>
+        </ol>
         <div class="flex gap-1">
           <button
             phx-click="push_submodal"
