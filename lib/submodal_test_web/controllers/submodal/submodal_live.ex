@@ -1,5 +1,5 @@
 defmodule SubmodalTestWeb.SubmodalLive do
-  use Phoenix.LiveView
+  use SubmodalTestWeb, :live_view
 
   def render(assigns) do
     ~H"""

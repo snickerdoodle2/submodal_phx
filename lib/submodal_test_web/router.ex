@@ -17,8 +17,7 @@ defmodule SubmodalTestWeb.Router do
   scope "/", SubmodalTestWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
-    live "/submodal", SubmodalLive
+    live "/", SubmodalLive
   end
 
   # Other scopes may use custom stacks.
