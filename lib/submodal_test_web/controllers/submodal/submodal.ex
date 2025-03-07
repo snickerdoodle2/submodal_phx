@@ -16,24 +16,54 @@ defmodule SubmodalTestWeb.SubmodalLive.Submodal do
       |> then(&assign(assigns, submodals: &1))
 
     ~H"""
-    <div>
-      <%= for submodal <- @submodals do %>
-        <%= if @current_submodal == elem(submodal, 0) do %>
-          {render_slot(elem(submodal, 1), %{root: @myself})}
+    <div class="border flex min-h-96">
+      <div class="flex-1">
+        <%= for submodal <- @submodals do %>
+          <%= if @current_submodal == elem(submodal, 0) do %>
+            {render_slot(elem(submodal, 1), %{root: @myself})}
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
 
-      <p>Current stack:</p>
-      <ol>
-        <li :for={submodal <- @submodal_stack}>{Atom.to_string(submodal)}</li>
-      </ol>
-      <button phx-click="push_submodal" phx-value-submodal="one" phx-target={@myself}>
-        Push one
-      </button>
-      <button phx-click="push_submodal" phx-value-submodal="two" phx-target={@myself}>
-        Push two
-      </button>
-      <button phx-click="pop_submodal" phx-target={@myself}>Pop</button>
+      <div class="px-5 py-3 border-l flex flex-col justify-between">
+        <div>
+          <p>
+            Current submodal: <span class="text-brand">:{@current_submodal |> Atom.to_string()}</span>
+          </p>
+          <p class="font-medium text-xl">Current stack:</p>
+          <ol class="list">
+            <li :for={submodal <- @submodal_stack} class="list-decimal">
+              :{Atom.to_string(submodal)}
+            </li>
+          </ol>
+        </div>
+        <div class="flex gap-1">
+          <button
+            phx-click="push_submodal"
+            phx-value-submodal="one"
+            phx-target={@myself}
+            class="px-2 py-1 bg-brand rounded font-medium text-white"
+          >
+            Push :one
+          </button>
+          <button
+            phx-click="pop_submodal"
+            phx-target={@myself}
+            class="border px-2 py-1 rounded"
+            disabled={Enum.empty?(@submodal_stack)}
+          >
+            Pop
+          </button>
+          <button
+            phx-click="push_submodal"
+            phx-value-submodal="two"
+            phx-target={@myself}
+            class="px-2 py-1 bg-brand rounded font-medium text-white"
+          >
+            Push :two
+          </button>
+        </div>
+      </div>
     </div>
     """
   end
